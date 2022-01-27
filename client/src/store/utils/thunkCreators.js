@@ -71,10 +71,11 @@ export const logout = (id) => async (dispatch) => {
 
 export const fetchConversations = () => async (dispatch) => {
   try {
+    console.log('fetchConversations triggered')
     const { data } = await axios.get("/api/conversations");
     dispatch(gotConversations(data));
   } catch (error) {
-    console.error(error);
+    console.error(error);                 
   }
 };
 
@@ -83,27 +84,39 @@ const saveMessage = async (body) => {
   return data;
 };
 
-const sendMessage = (data, body) => {
-  socket.emit("new-message", {
-    message: data.message,
-    recipientId: body.recipientId,
-    sender: data.sender,
-  });
+const sendMessage = (body) => {
+  try {
+    console.log('thunk sendMessage to socket')
+    socket.emit("new-message", {
+      // changed from message: data.message
+      // sender: data.sender
+      message: body.text,
+      recipientId: body.recipientId,
+      sender: body.sender,
+    });
+  }
+  catch {
+    console.log('unable to send message to socket')
+  }
 };
 
 // message format to send: {recipientId, text, conversationId}
 // conversationId will be set to null if its a brand new conversation
-export const postMessage = (body) => (dispatch) => {
+export const postMessage = (body) => async (dispatch) => {
   try {
-    const data = saveMessage(body);
+    const data = await saveMessage(body);
+    console.log('await data: ', data);
 
-    if (!body.conversationId) {
-      dispatch(addConversation(body.recipientId, data.message));
+    if (!body.conversationId) {               // was data.message
+      dispatch(addConversation(body.recipientId, body.text));
     } else {
+     
+        // send setNewMessage -> message and sender (body.text and body.sender)
+        // dispatch(setNewMessage(data.message));
       dispatch(setNewMessage(data.message));
     }
-
-    sendMessage(data, body);
+   
+    sendMessage(body);
   } catch (error) {
     console.error(error);
   }

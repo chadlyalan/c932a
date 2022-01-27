@@ -35,7 +35,10 @@ const Input = (props) => {
       conversationId,
       sender: conversationId ? null : user
     };
+    console.log('input.js, handleSubmit, conversationId: ', reqBody);
     await postMessage(reqBody);
+    // right now postMessage puts the error in console.log
+    // if it fails we probably shouldn't just clear the text..
     setText("");
   };
 
