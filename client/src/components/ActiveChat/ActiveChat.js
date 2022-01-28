@@ -2,7 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Box } from "@material-ui/core";
 import { Input, Header, Messages } from "./index";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -20,15 +20,27 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-
+const selectConversations = state => state.conversations;
 
 const ActiveChat = (props) => {
   const classes = useStyles();
   const { user } = props;
   const conversation = props.conversation || {};
 
+  const convo = useSelector(selectConversations);
+
+  // const selectConvo = useSelector((state) => {
+  //   const correctConvo = state.conversations.filter((item) => {
+  //     return item.id === conversation.id
+  //   })
+  //   return correctConvo
+  // })
+
+  // const convo = selectConvo[0];
+  console.log('activeChat.js props conversation: ', conversation);
+  console.log('activeChat selector state convo: ', convo);
+
   
-  console.log('activeChat.js state -> props.conversation: ', conversation);
 
   return (
     <Box className={classes.root}>

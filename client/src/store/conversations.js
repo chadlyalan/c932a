@@ -26,7 +26,6 @@ export const gotConversations = (conversations) => {
 };
 
 export const setNewMessage = (message, sender) => {
-  console.log('conversations.js-setNewMessage(message)): ' , message);
   return {
     type: SET_MESSAGE,
     payload: { message, sender: sender || null },
