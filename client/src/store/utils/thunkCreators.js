@@ -68,6 +68,9 @@ export const logout = (id) => async (dispatch) => {
 };
 
 // CONVERSATIONS THUNK CREATORS
+
+// this reverses the order of the messages array inside
+// the array of conversations.
 const reverseMessages = (all) => {
   const newMessages = all;
   newMessages.map((item) => {
@@ -97,15 +100,15 @@ const saveMessage = async (body) => {
   return data;
 };
 
-const sendMessage = (body) => {
+const sendMessage = (data, body) => {
   try {
     console.log('thunk sendMessage to socket')
     socket.emit("new-message", {
       // changed from message: data.message
       // sender: data.sender
-      message: body.text,
+      message: data.message,
       recipientId: body.recipientId,
-      sender: body.sender,
+      sender: data.sender,
     });
   }
   catch {
@@ -129,7 +132,7 @@ export const postMessage = (body) => async (dispatch) => {
       dispatch(setNewMessage(data.message));
     }
    
-    sendMessage(body);
+    sendMessage(data, body);
   } catch (error) {
     console.error(error);
   }
