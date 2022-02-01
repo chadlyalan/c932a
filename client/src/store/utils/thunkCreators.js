@@ -68,12 +68,25 @@ export const logout = (id) => async (dispatch) => {
 };
 
 // CONVERSATIONS THUNK CREATORS
+const reverseMessages = (all) => {
+  const newMessages = all;
+  newMessages.map((item) => {
+    const convo = [];
+    item.messages.slice(0).reverse().map((message) => {
+      convo.push(message);
+    })
+    item.messages = convo;
+  })
+  
+  return newMessages;
+}
 
 export const fetchConversations = () => async (dispatch) => {
   try {
     console.log('fetchConversations triggered')
     const { data } = await axios.get("/api/conversations");
-    dispatch(gotConversations(data));
+    const newMessages = reverseMessages(data);
+    dispatch(gotConversations(newMessages));
   } catch (error) {
     console.error(error);                 
   }

@@ -37,10 +37,7 @@ const ActiveChat = (props) => {
   // })
 
   // const convo = selectConvo[0];
-  console.log('activeChat.js props conversation: ', conversation);
   console.log('activeChat selector state convo: ', convo);
-
-  
 
   return (
     <Box className={classes.root}>
