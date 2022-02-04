@@ -86,7 +86,6 @@ const reverseMessages = (all) => {
 
 export const fetchConversations = () => async (dispatch) => {
   try {
-    console.log('fetchConversations triggered')
     const { data } = await axios.get("/api/conversations");
     const newMessages = reverseMessages(data);
     dispatch(gotConversations(newMessages));
@@ -102,7 +101,6 @@ const saveMessage = async (body) => {
 
 const sendMessage = (data, body) => {
   try {
-    console.log('thunk sendMessage to socket')
     socket.emit("new-message", {
       // changed from message: data.message
       // sender: data.sender
@@ -121,7 +119,6 @@ const sendMessage = (data, body) => {
 export const postMessage = (body) => async (dispatch) => {
   try {
     const data = await saveMessage(body);
-    console.log('await data: ', data);
 
     if (!body.conversationId) {              
       dispatch(addConversation(body.recipientId, data.message));
