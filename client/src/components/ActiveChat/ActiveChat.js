@@ -20,14 +20,10 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const selectConversations = state => state.conversations;
-
 const ActiveChat = (props) => {
   const classes = useStyles();
   const { user } = props;
   const conversation = props.conversation || {};
-
-  const convo = useSelector(selectConversations);
 
   return (
     <Box className={classes.root}>
