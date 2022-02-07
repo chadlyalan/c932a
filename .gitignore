@@ -23,3 +23,4 @@ server/.env
 client/cypress/videos
 client/cypress/screenshots
 server/db/db.js
+server/db/db.js
