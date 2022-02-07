@@ -69,12 +69,23 @@ export const logout = (id) => async (dispatch) => {
 
 // CONVERSATIONS THUNK CREATORS
 
+// this reverses the order of the messages array inside
+// the array of conversations.
+const reverseMessages = (all) => {
+  const newMessages = all;
+  newMessages.forEach((item) => {
+    item.messages = item.messages.reverse();
+  })
+  return newMessages;
+}
+
 export const fetchConversations = () => async (dispatch) => {
   try {
     const { data } = await axios.get("/api/conversations");
-    dispatch(gotConversations(data));
+    const newMessages = reverseMessages(data);
+    dispatch(gotConversations(newMessages));
   } catch (error) {
-    console.error(error);
+    console.error(error);                 
   }
 };
 
@@ -84,25 +95,33 @@ const saveMessage = async (body) => {
 };
 
 const sendMessage = (data, body) => {
-  socket.emit("new-message", {
-    message: data.message,
-    recipientId: body.recipientId,
-    sender: data.sender,
-  });
+  try {
+    socket.emit("new-message", {
+      message: data.message,
+      recipientId: body.recipientId,
+      sender: data.sender,
+    });
+  }
+  catch {
+    console.log('unable to send message to socket')
+  }
 };
 
 // message format to send: {recipientId, text, conversationId}
 // conversationId will be set to null if its a brand new conversation
-export const postMessage = (body) => (dispatch) => {
+export const postMessage = (body) => async (dispatch) => {
   try {
-    const data = saveMessage(body);
+    const data = await saveMessage(body);
 
-    if (!body.conversationId) {
+    if (!body.conversationId) {              
       dispatch(addConversation(body.recipientId, data.message));
     } else {
+     
+        // send setNewMessage -> message and sender (body.text and body.sender)
+        // dispatch(setNewMessage(data.message));
       dispatch(setNewMessage(data.message));
     }
-
+   
     sendMessage(data, body);
   } catch (error) {
     console.error(error);
