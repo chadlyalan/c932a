@@ -29,16 +29,6 @@ const ActiveChat = (props) => {
 
   const convo = useSelector(selectConversations);
 
-  // const selectConvo = useSelector((state) => {
-  //   const correctConvo = state.conversations.filter((item) => {
-  //     return item.id === conversation.id
-  //   })
-  //   return correctConvo
-  // })
-
-  // const convo = selectConvo[0];
-  console.log('activeChat selector state convo: ', convo);
-
   return (
     <Box className={classes.root}>
       {conversation.otherUser && (

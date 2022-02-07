@@ -73,14 +73,9 @@ export const logout = (id) => async (dispatch) => {
 // the array of conversations.
 const reverseMessages = (all) => {
   const newMessages = all;
-  newMessages.map((item) => {
-    const convo = [];
-    item.messages.slice(0).reverse().map((message) => {
-      convo.push(message);
-    })
-    item.messages = convo;
+  newMessages.forEach((item) => {
+    item.messages = item.messages.reverse();
   })
-  
   return newMessages;
 }
 
@@ -102,8 +97,6 @@ const saveMessage = async (body) => {
 const sendMessage = (data, body) => {
   try {
     socket.emit("new-message", {
-      // changed from message: data.message
-      // sender: data.sender
       message: data.message,
       recipientId: body.recipientId,
       sender: data.sender,

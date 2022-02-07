@@ -22,7 +22,6 @@ socket.on("connect", () => {
 
   });
   socket.on("new-message", (data) => {
-    console.log("new-message data: ", data.message);
     store.dispatch(setNewMessage(data.message, data.sender));
   });
 });
