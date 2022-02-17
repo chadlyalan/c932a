@@ -10,6 +10,8 @@ import {
   TextField,
 } from "@material-ui/core";
 import { login } from "./store/utils/thunkCreators";
+import WelcomeSide from './WelcomeSide.js';
+import './style/main-welcome.css';
 
 const Login = (props) => {
   const history = useHistory();
@@ -28,13 +30,17 @@ const Login = (props) => {
   }
 
   return (
-    <Grid container justify="center">
+    <div>
+    
+    
+    <Grid container justify="flex-start">
+      <WelcomeSide />
       <Box>
-        <Grid container item>
+        <Grid className="create-login" container item>
           <Typography>Need to register?</Typography>
           <Button onClick={() => history.push("/register")}>Register</Button>
         </Grid>
-        <form onSubmit={handleLogin}>
+        <form className="form-landing" onSubmit={handleLogin}>
           <Grid>
             <Grid>
               <FormControl margin="normal" required>
@@ -56,13 +62,14 @@ const Login = (props) => {
             </FormControl>
             <Grid>
               <Button type="submit" variant="contained" size="large">
-                Login
+                stupid
               </Button>
             </Grid>
           </Grid>
         </form>
       </Box>
     </Grid>
+    </div> 
   );
 };
 
