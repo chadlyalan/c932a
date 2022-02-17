@@ -56,7 +56,8 @@ const Login = (props) => {
   const history = useHistory();
   const { user, register } = props;
   const [formErrorMessage, setFormErrorMessage] = useState({});
-  const isSmallOrLess = useMediaQuery(theme.breakpoints.up('md'));
+  const isMediumOrMore = useMediaQuery(theme.breakpoints.up('md'));
+  const picture = "bg-img.png";
 
   const handleRegister = async (event) => {
     event.preventDefault();
@@ -80,7 +81,7 @@ const Login = (props) => {
   return (
     
     <Grid container justify="flex-start" spacing={4}>
-      {isSmallOrLess ? 
+      {isMediumOrMore ? 
         <Grid item md={5} className={classes.picture}>
           <WelcomeSide /> 
         </Grid>
@@ -93,7 +94,15 @@ const Login = (props) => {
       <Grid container item xs={12} md={7}
         spacing={5}
         direction="column" 
-        className={classes.main}>
+        className={classes.main}
+        backgroundImage={
+          isMediumOrMore ?
+          // the welcome image
+          `url(${process.env.PUBLIC_URL} + ${picture})`
+          :
+          // if the screen is big then do nothing
+          null
+        }>
         
           
         <Grid className={classes.welcome} container item>
