@@ -4,8 +4,8 @@ import React from "react";
 const useStyles = makeStyles(theme => ({
     main: {
         display: 'flex',
-        width: '100%',
-        height: 'auto',
+        width: '60vh',
+        height: '100vh',
     },
     image: {
         width: '100%',

@@ -20,6 +20,7 @@ const useStyles = makeStyles(theme => ({
     height: '90vh',
     color: theme.palette.text.secondary,
     padding: theme.spacing(2),
+    
     }, 
   picture: {
 
@@ -82,7 +83,7 @@ const Login = (props) => {
     
     <Grid container justify="flex-start" spacing={4}>
       {isMediumOrMore ? 
-        <Grid item md={5} className={classes.picture}>
+        <Grid item md={7} lg={5} className={classes.picture}>
           <WelcomeSide /> 
         </Grid>
         : 
@@ -91,7 +92,7 @@ const Login = (props) => {
         
       
       
-      <Grid container item xs={12} md={7}
+      <Grid container item sm={12} md={5} lg={7}
         spacing={5}
         direction="column" 
         className={classes.main}
