@@ -20,7 +20,7 @@ const WelcomeSide = () => {
     <div className={classes.main}>
         <img className={classes.image}
         src={process.env.PUBLIC_URL + picture}
-        alt="some unspecified words"
+        alt=""
         />   
     </div>
 )}   
