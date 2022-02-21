@@ -10,22 +10,23 @@ import {
 } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
-  main: {
-    height: '100vh',
-    color: theme.palette.text.secondary,
-    padding: theme.spacing(2),
+  root: {
+    height: '100%',
+    marginRight: 'auto',
+    marginLeft: 'auto',
+    
     }, 
   picture: {
 
   },
-  welcome: {
-    height: '20%',
-    
+  header: {
+    height: '15%',
     },
   grid: {
     height: '70%',  
     textAlign: "center",
     alignContent: 'center',
+    width: '100%'
   },
   title: {
     fontSize: '2rem',
@@ -36,11 +37,11 @@ const useStyles = makeStyles(theme => ({
     "& input": {
       fontSize: '16px',
       fontFamily: 'Open Sans',
-      width: '70%'
+      width: '90%'
     }
   },
   form: {
-    width: '60%'
+    
   }
 }));
 
@@ -53,15 +54,19 @@ const RegisterMain = (props) => {
     <Grid container item sm={12} md={5} lg={7}
         spacing={5}
         direction="column" 
-        className={classes.main}
+        alignItems="center"
+        className={classes.root}
         >
         
           
-      <Grid className={classes.header} container item>
+      <Grid className={classes.header} 
+        container item justifyContent="flex-end"
+        alignItems="center"
+        >
         
-        <Grid item xs={5}/>
+       
 
-        <Grid item xs={4}>
+        <Grid item xs={6}>
           <Typography className="typography" color="secondary">
             Already have an account?
           </Typography>
@@ -71,7 +76,9 @@ const RegisterMain = (props) => {
           <Button 
             className="create-login-button" 
             color="primary"
-            onClick={() => history.push("/login")}>Login</Button>
+            onClick={() => history.push("/login")}>
+              Login
+          </Button>
         </Grid>
         
         

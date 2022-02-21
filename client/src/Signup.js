@@ -16,12 +16,14 @@ const useStyles = makeStyles(theme => ({
     height: '100vh',
     color: theme.palette.text.secondary,
     padding: theme.spacing(2),
+
     }, 
+ 
   small: {
 
   },
   picture: {
-    
+
   }
 }));
 
@@ -64,9 +66,9 @@ const Login = (props) => {
             <WelcomeSide /> 
           </Grid>
 
-          <Grid item>
+          <Grid item md={5} lg={7} alignItems="center"
+            className={classes.main} >
             <RegisterMain 
-              className={classes.main}
               handleRegister={handleRegister}
               history={history}
               formErrorMessage={formErrorMessage}
@@ -76,9 +78,8 @@ const Login = (props) => {
       )
       :
         (
-        <Grid item>
+        <Grid item className={classes.small}>
           <RegisterMain 
-            className={classes.small}
             handleRegister={handleRegister}
             history={history}
             formErrorMessage={formErrorMessage}
