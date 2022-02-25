@@ -3,6 +3,7 @@ import { Redirect, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import {
   Grid,
+  Typography,
   useMediaQuery,
 } from "@material-ui/core";
 import { register } from "./store/utils/thunkCreators";
@@ -16,17 +17,22 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.text.secondary,
     }, 
   big: {
-    height: '102%',
+    height: '100%',
   },
   small: {
     background: `url(${picture})`, 
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
-
-    
+  },
+  text: {
+    color: 'white',
+    position: 'relative',
+    top: '50%',
+    textAlign: 'center',
+    fontSize: 'x-large',
   },
   gradient: {
-    height: '102%',
+    height: '100%',
     background: 'linear-gradient(180deg, #3A8DFF 0%, #86B9FF 100%)',
     opacity: '.90',
   },
@@ -72,6 +78,13 @@ const Login = (props) => {
       
       <Grid item xs={0} sm={0} md={6} lg={5} 
         className={classes.picture}>
+          <div className={classes.gradient}>
+            <div className={classes.bubble} />
+            <Typography className={classes.text}>
+              Converse with anyone with any language
+            </Typography>
+          </div>
+        
         
       </Grid>
 
