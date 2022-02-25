@@ -10,7 +10,6 @@ import {
   TextField,
 } from "@material-ui/core";
 import { login } from "./store/utils/thunkCreators";
-import WelcomeSide from './WelcomeSide.js';
 import './style/main-welcome.css';
 
 const Login = (props) => {
@@ -34,7 +33,6 @@ const Login = (props) => {
     
     
     <Grid container justify="flex-start">
-      <WelcomeSide />
       <Box>
         <Grid className="create-login" container item>
           <Typography>Need to register?</Typography>

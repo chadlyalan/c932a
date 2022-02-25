@@ -14,19 +14,17 @@ const useStyles = makeStyles(theme => ({
     height: '100%',
     marginRight: 'auto',
     marginLeft: 'auto',
-    
-    }, 
-  picture: {
-
-  },
+    },
   header: {
-    height: '15%',
+    height: '20%',
+    
     },
   grid: {
     height: '70%',  
     textAlign: "center",
     alignContent: 'center',
-    width: '100%'
+    width: '100%',
+
   },
   title: {
     fontSize: '2rem',
@@ -37,11 +35,21 @@ const useStyles = makeStyles(theme => ({
     "& input": {
       fontSize: '16px',
       fontFamily: 'Open Sans',
-      width: '90%'
+      
+    },
+    "& .MuiInput-underline:before": {
+      borderBottom: '1px solid #3A8DFF'
+    },
+    "& .MuiInput-underline:hover:not(.Mui-disabled):before": {
+      borderBottom: '2px solid #3A8DFF'
     }
   },
   form: {
-    
+    width: '100%',
+  },
+  button: {
+    background: 'white',
+    boxShadow: '0px 4px 4px rgba(74, 106, 149, .2)'
   }
 }));
 
@@ -63,100 +71,99 @@ const RegisterMain = (props) => {
         container item justifyContent="flex-end"
         alignItems="center"
         >
-        
-       
 
         <Grid item xs={6}>
-          <Typography className="typography" color="secondary">
+          <Typography color="secondary">
             Already have an account?
           </Typography>
         </Grid>
 
         <Grid item xs={3}>
           <Button 
-            className="create-login-button" 
+            className={classes.button}
             color="primary"
             onClick={() => history.push("/login")}>
               Login
           </Button>
         </Grid>
-        
-        
       </Grid>
 
         <Grid container item
-          justifyContent="space-evenly"
-          spacing={3} className={classes.grid}
-          >
+              justifyContent="space-evenly"
+              spacing={3} className={classes.grid}>
           <form 
             className={classes.form}
             onSubmit={handleRegister}>
-          <Typography 
-            className={classes.title}
-          >Create an account</Typography>
+            <Typography 
+              color="secondary"
+              className={classes.title}>
+                Create an account
+            </Typography>
 
             <Grid item container direction="column"
-            className={classes.input}>
+                  className={classes.input}>
               <Grid item>
-              <FormControl>
-                <TextField
-                  color="primary"
-                  className="username"
-                  aria-label="username"
-                  label="Username"
-                  name="username"
-                  type="text"
-                  required
-                />
-              </FormControl>
-            </Grid>
-            <Grid item>
-              <FormControl>
-                <TextField
-                  color="secondary"
-                  className="email"
-                  label="E-mail address"
-                  aria-label="e-mail address"
-                  type="email"
-                  name="email"
-                  required
-                />
-              </FormControl>
-            </Grid>
-            <Grid item>
-              <FormControl error={!!formErrorMessage.confirmPassword}>
-                <TextField
-                  color="secondary"
-                  className="password"
-                  aria-label="password"
-                  label="Password"
-                  type="password"
-                  inputProps={{ minLength: 6 }}
-                  name="password"
-                  required
-                />
-                <FormHelperText>
-                  {formErrorMessage.confirmPassword}
-                </FormHelperText>
-              </FormControl>
-            </Grid>
-            <Grid item>
-              <FormControl error={!!formErrorMessage.confirmPassword}>
-                <TextField
-                  color="secondary"
-                  className="password"
-                  label="Confirm Password"
-                  aria-label="confirm password"
-                  type="password"
-                  inputProps={{ minLength: 6 }}
-                  name="confirmPassword"
-                  required
-                />
-                <FormHelperText>
-                  {formErrorMessage.confirmPassword}
-                </FormHelperText>
-              </FormControl>
-            </Grid>
+                <FormControl fullWidth="true">
+                  <TextField
+                    color="primary"
+                    className="username"
+                    aria-label="username"
+                    label="Username"
+                    name="username"
+                    type="text"
+                    required
+                  />
+                </FormControl>
+              </Grid>
+              <Grid item>
+                <FormControl fullWidth="true">
+                  <TextField
+                    color="secondary"
+                    className="email"
+                    label="E-mail address"
+                    aria-label="e-mail address"
+                    type="email"
+                    name="email"
+                    required
+                  />
+                </FormControl>
+              </Grid>
+              <Grid item>
+                <FormControl  fullWidth="true"
+                  error={!!formErrorMessage.confirmPassword}>
+                  <TextField
+                    color="secondary"
+                    className="password"
+                    aria-label="password"
+                    label="Password"
+                    type="password"
+                    inputProps={{ minLength: 6 }}
+                    name="password"
+                    required
+                  />
+                  <FormHelperText>
+                    {formErrorMessage.confirmPassword}
+                  </FormHelperText>
+                </FormControl>
+              </Grid>
+              <Grid item>
+                <FormControl  fullWidth="true"
+                  error={!!formErrorMessage.confirmPassword}>
+                  <TextField
+                    color="secondary"
+                    className="password"
+                    label="Confirm Password"
+                    aria-label="confirm password"
+                    type="password"
+                    inputProps={{ minLength: 6 }}
+                    name="confirmPassword"
+                    required
+                  />
+                  <FormHelperText>
+                    {formErrorMessage.confirmPassword}
+                  </FormHelperText>
+                </FormControl>
+              </Grid>
             </Grid>
             
             <Button
