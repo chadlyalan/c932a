@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.text.secondary,
     }, 
   big: {
-
+    height: '102%',
   },
   small: {
     background: `url(${picture})`, 
@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
     
   },
   gradient: {
-    height: '100%',
+    height: '102%',
     background: 'linear-gradient(180deg, #3A8DFF 0%, #86B9FF 100%)',
     opacity: '.90',
   },
@@ -70,18 +70,19 @@ const Login = (props) => {
   return (
     <Grid container justify="flex-start" >
       
-      <Grid item xs={0} sm={0} md={7} lg={5} 
+      <Grid item xs={0} sm={0} md={6} lg={5} 
         className={classes.picture}>
         
       </Grid>
 
-      <Grid item xs={12} sm={12} md={5} lg={7} 
+      <Grid item xs={12} sm={12} md={6} lg={7} 
         alignItems="center"
+
         className={
-          isMediumOrMore ? classes.big : classes.small
+          isMediumOrMore ? null : classes.small
           } >
         <div className={
-          isMediumOrMore ? null : classes.gradient
+          isMediumOrMore ? classes.big : classes.gradient
           }>
           <RegisterMain 
             className={classes.main}
