@@ -7,43 +7,10 @@ import {
   useMediaQuery,
 } from "@material-ui/core";
 import { register } from "./store/utils/thunkCreators";
-import './style/main-welcome.css';
-import { makeStyles, useTheme } from "@material-ui/styles";
+import { useTheme } from "@material-ui/styles";
 import RegisterMain from "./components/RegisterMain";
-import picture from "../src/images/bg-img.png";
-
-const useStyles = makeStyles(theme => ({
-  main: {
-    color: theme.palette.text.secondary,
-    }, 
-  big: {
-    height: '100%',
-  },
-  small: {
-    background: `url(${picture})`, 
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover',
-  },
-  text: {
-    color: 'white',
-    position: 'relative',
-    top: '50%',
-    textAlign: 'center',
-    fontSize: 'x-large',
-  },
-  gradient: {
-    height: '100%',
-    background: 'linear-gradient(180deg, #3A8DFF 0%, #86B9FF 100%)',
-    opacity: '.90',
-  },
-  picture: {
-    height: '100vh',
-    backgroundImage: `url(${picture})`,
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover',
-  }
-}));
-
+import useStyles from "./style/landingStyles";
+import { ReactComponent as BubbleIcon} from './images/bubble.svg';
 
 const Login = (props) => {
   const theme = useTheme();
@@ -72,33 +39,36 @@ const Login = (props) => {
     return <Redirect to="/home" />;
   }
 
-
   return (
-    <Grid container justify="flex-start" >
+    <Grid container justify="flex-start" className={classes.root}>
       
-      <Grid item xs={0} sm={0} md={6} lg={5} 
-        className={classes.picture}>
+      <Grid item xs={0} sm={0} md={6} lg={5} className={classes.picture}
+        >
+          {isMediumOrMore ? 
+          (
           <div className={classes.gradient}>
-            <div className={classes.bubble} />
-            <Typography className={classes.text}>
-              Converse with anyone with any language
-            </Typography>
+            <div className={classes.sideContainer}>
+              <BubbleIcon  />
+              <Typography className={classes.text}>
+                Converse with anyone with any language
+              </Typography>
+            </div>
           </div>
-        
-        
+          ) : 
+          (null) 
+          }
+          
       </Grid>
 
       <Grid item xs={12} sm={12} md={6} lg={7} 
         alignItems="center"
-
         className={
           isMediumOrMore ? null : classes.small
           } >
         <div className={
-          isMediumOrMore ? classes.big : classes.gradient
+          isMediumOrMore ? classes.big : classes.smallGradient
           }>
           <RegisterMain 
-            className={classes.main}
             handleRegister={handleRegister}
             history={history}
             formErrorMessage={formErrorMessage}

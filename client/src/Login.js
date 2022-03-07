@@ -3,18 +3,22 @@ import { Redirect, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import {
   Grid,
-  Box,
   Typography,
-  Button,
-  FormControl,
-  TextField,
+  useMediaQuery,
 } from "@material-ui/core";
+import { useTheme } from "@material-ui/styles";
 import { login } from "./store/utils/thunkCreators";
-import './style/main-welcome.css';
+import LoginMain from "./components/LoginMain";
+import { ReactComponent as BubbleIcon} from './images/bubble.svg';
+import useStyles from "./style/landingStyles";
 
 const Login = (props) => {
   const history = useHistory();
   const { user, login } = props;
+  const classes = useStyles();
+  const theme = useTheme();
+  const isMediumOrMore = useMediaQuery(theme.breakpoints.up('md'));
+
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -29,46 +33,44 @@ const Login = (props) => {
   }
 
   return (
-    <div>
-    
-    
-    <Grid container justify="flex-start">
-      <Box>
-        <Grid className="create-login" container item>
-          <Typography>Need to register?</Typography>
-          <Button onClick={() => history.push("/register")}>Register</Button>
-        </Grid>
-        <form className="form-landing" onSubmit={handleLogin}>
-          <Grid>
-            <Grid>
-              <FormControl margin="normal" required>
-                <TextField
-                  aria-label="username"
-                  label="Username"
-                  name="username"
-                  type="text"
-                />
-              </FormControl>
-            </Grid>
-            <FormControl margin="normal" required>
-              <TextField
-                label="password"
-                aria-label="password"
-                type="password"
-                name="password"
-              />
-            </FormControl>
-            <Grid>
-              <Button type="submit" variant="contained" size="large">
-                stupid
-              </Button>
-            </Grid>
-          </Grid>
-        </form>
-      </Box>
+    <Grid container justify="flex-start" className={classes.root}>
+      
+      <Grid item xs={0} sm={0} md={6} lg={5} className={classes.picture}
+        >
+          {isMediumOrMore ? 
+          (
+          <div className={classes.gradient}>
+            <div className={classes.sideContainer}>
+              <BubbleIcon  />
+              <Typography className={classes.text}>
+                Converse with anyone with any language
+              </Typography>
+            </div>
+          </div>
+          ) : 
+          (null) 
+          }
+          
+      </Grid>
+
+      <Grid item xs={12} sm={12} md={6} lg={7} 
+        alignItems="center"
+        className={
+          isMediumOrMore ? null : classes.small
+          } >
+        <div className={
+          isMediumOrMore ? classes.big : classes.smallGradient
+          }>
+          <LoginMain 
+            handleLogin={handleLogin}
+            history={history}
+          />
+        </div>
+          
+      </Grid>
     </Grid>
-    </div> 
-  );
+  )   
+
 };
 
 const mapStateToProps = (state) => {
